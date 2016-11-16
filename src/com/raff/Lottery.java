@@ -3,9 +3,7 @@ import javax.management.RuntimeErrorException;
 import java.util.Random;
 import java.util.Arrays;
 
-/**
- * Created by cj on 11/16/16.
- */
+
 public class Lottery {
 
 

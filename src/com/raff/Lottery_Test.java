@@ -9,9 +9,6 @@ import org.junit.Test;
 
 import javax.management.RuntimeErrorException;
 
-/**
- * Created by cj on 11/16/16.
- */
 
 public class Lottery_Test {
 
@@ -132,7 +129,7 @@ public class Lottery_Test {
         boolean result =  testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0);
     }
 
-    //Tests the extreme bounds of ensuring the random number is within the input parameters
+    //Tests the extrem bounds of ensuring the random number is within the input parameters
     @Test
     public void testGenerateRandomNumberInRangeEdgeCase(){
         int lower_bound = 4;
