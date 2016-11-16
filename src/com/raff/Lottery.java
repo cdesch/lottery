@@ -2,6 +2,8 @@ package com.raff;
 import javax.management.RuntimeErrorException;
 import java.util.Random;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by cj on 11/16/16.
  */
@@ -22,21 +24,23 @@ public class Lottery {
     //Dynamic array size
     public static int[] generatePicks(int size, int lowValue, int highValue, long seed) {
 
+        List<Integer> intArray = new ArrayList<Integer>();
 
-        //Generating random numbers
-
-        //Initial an empty
-        for (int i = 0; i < size; i++) {
-
-        }
         //With a loop, generate a random number
         //Check to see if that number is already in the array? If it is not, add it, if it is in the array generate a new random number
         // then add it to the array.
+        for (int i = 0; i < size; i++) {
+            int randomNumber = generateRandomNumberInRange(lowValue, highValue, seed);
+            //Check to see if that number is already in the array? If it is not, add it, if it is in the array generate a new random number
+            while (intArray.contains(randomNumber)) {
+                randomNumber = generateRandomNumberInRange(lowValue, highValue, seed); // WARNING - Potential LARGE Running Loop
+            }
+            intArray.add(randomNumber);
+        }
 
-        //Sort those random numbers
-
-        //TODO: Replace with random generator
-        return new int[]{1, 2, 3};
+        //printArray(intArray); //FIXME: For debugging - Remove
+        int[] sortedArray = new int[intArray.size()];
+        return sortArray(intArray.toArray(sortedArray));
 
     }
 
@@ -46,7 +50,6 @@ public class Lottery {
 
         //Create with empty slots of a certain size
         int[] intArray = new int[size];
-
 
         //With a loop, generate a random number and insert it into the array
         for (int i = 0; i < size; i++) {
@@ -58,16 +61,9 @@ public class Lottery {
             intArray[i] = randomNumber;
         }
 
-        printArray(intArray); //FIXME: For debugging - Remove
+        //printArray(intArray); //FIXME: For debugging - Remove
 
-
-        int[] sortedArray = sortArray(intArray);
-
-        //Sort those random numbers
-        printArray(sortedArray); //FIXME: For debugging - Remove
-
-        return sortedArray;
-
+        return sortArray(intArray);
     }
 
 
