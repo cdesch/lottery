@@ -23,13 +23,6 @@ public class Lottery_Test {
     public static int TOTAL_PRIZE = 10000;
 
 
-    @Test
-    public void evaluatesExpression() {
-
-        assertEquals(6, 6);
-    }
-
-
     @BeforeClass
     public static void setUpClass() {
         System.out.println("Test Class Setup & Seed Attributes");
@@ -44,56 +37,16 @@ public class Lottery_Test {
     }
 
     /*
-    Before running each test, generate seed data that can be reused
+     * Before running each test, generate seed data that can be reused
      */
     @Before
     public void seedData(){
 
     }
+
     /*
-    generatePicks
-    //TODO Doc properly
+     * TODO: Document properly
      */
-
-    public void generatePicksRangeTest( int min, int max){
-        //Test that the
-
-//        fail("Not Implemented");
-
-        //Valid test that has an array with Min - that it is valid
-        // generatePicksRangeMinTest(seedTests(), 3); // false
-        // generatePicksRangeMinTest(seedTests(), 11); // true
-        // generatePicksRangeMaxTest(seedTests(), 11); // true
-        // generatePicksRangeMaxTest(seedTests(), 26); // true
-        // generatePicksSizeTest(seedTests(), 4); //false for less than
-        // generatePicksSizeTest(seedTests(), 5); //true for equals
-        // generatePicksSizeTest(seedTests(), 4); //false for greater than
-
-    }
-
-    public void generatePicksRangeMinTest(int[] array, int min){
-        //Test that the
-       // fail("Not Implemented");
-    }
-
-    public void generatePicksRangeMaxTest(int[] array,  int max){
-        //Test that the
-      //  fail("Not Implemented");
-    }
-
-
-    public void generatePicksSizeTest(int[] array,  int size){
-        //Test that the
-      //  fail("Not Implemented");
-    }
-
-
-    //TODO: Test 1 seed should not generate the same array as a different seed
-    public void generatePicksSeedTest(int[] array,  int size){
-        //Test that the
-     //   fail("Not Implemented");
-    }
-
     @Test
     public void testCheckUserNumbersCase(){
 
