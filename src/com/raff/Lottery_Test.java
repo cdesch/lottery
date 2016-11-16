@@ -1,11 +1,19 @@
 package com.raff;
-//import static org.junit.Assert.assertEquals;
-//import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 /**
  * Created by cj on 11/16/16.
  */
+
 public class Lottery_Test {
 
+
+    @Test
+    public void evaluatesExpression() {
+
+        assertEquals(6, 6);
+    }
 
     public int[] seedTests(){
         return Lottery.generatePicks(5,10,25,2342);

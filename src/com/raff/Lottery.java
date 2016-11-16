@@ -39,6 +39,7 @@ public class Lottery {
 
     }
 
+
     //Generate the array with predefined array size
     public static int[] generatePicksAlternate(int size, int lowValue, int highValue, long seed) {
         //Generating random numbers
