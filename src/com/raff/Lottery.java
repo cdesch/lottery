@@ -2,8 +2,7 @@ package com.raff;
 import javax.management.RuntimeErrorException;
 import java.util.Random;
 import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
+
 /**
  * Created by cj on 11/16/16.
  */
@@ -24,29 +23,8 @@ public class Lottery {
     //Dynamic array size
     public static int[] generatePicks(int size, int lowValue, int highValue, long seed) {
 
-        List<Integer> intArray = new ArrayList<Integer>();
-
-        //With a loop, generate a random number
-        //Check to see if that number is already in the array? If it is not, add it, if it is in the array generate a new random number
-        // then add it to the array.
-        for (int i = 0; i < size; i++) {
-            int randomNumber = generateRandomNumberInRange(lowValue, highValue, seed);
-            //Check to see if that number is already in the array? If it is not, add it, if it is in the array generate a new random number
-            while (intArray.contains(randomNumber)) {
-                randomNumber = generateRandomNumberInRange(lowValue, highValue, seed); // WARNING - Potential LARGE Running Loop
-            }
-            intArray.add(randomNumber);
-        }
-
-        //printArray(intArray); //FIXME: For debugging - Remove
-        int[] sortedArray = new int[intArray.size()];
-        return sortArray(intArray.toArray(sortedArray));
-
-    }
-
-
-    //Generate the array with predefined array size
-    public static int[] generatePicksAlternate(int size, int lowValue, int highValue, long seed) {
+        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
+        //In generatePicks, size must be 3 or greater but no larger than the range from lowValue to highValue.
 
         //Create with empty slots of a certain size
         int[] intArray = new int[size];
@@ -64,12 +42,34 @@ public class Lottery {
         //printArray(intArray); //FIXME: For debugging - Remove
 
         return sortArray(intArray);
+
     }
+
+
 
 
     public static int checkUserNumbers(int[] picks, int[] userNumbers) {
 
-        return 1;
+
+        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
+        //In checkUserNumbers, both picks and userNumbers cannot be null. Additionally, they must be the same length.
+        //Check to see that the picks and userNumbers are the same size
+
+
+        int sharedNumbersCount = 0;
+
+        //Use a nested loop to compare the two arrays
+        //if one number shared between the arrays, increment the counter
+        //TODO: Implement
+//
+//        for (;;){
+//            for(;;){
+//
+//            }
+//        }
+
+
+        return sharedNumbersCount;
     }
 
 
@@ -79,12 +79,22 @@ public class Lottery {
     *   @return array of sorted elements
      */
     public static int[] sortArray(int[] unsorted) {
+        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
+        //TODO: In sortArray, unsorted may not be null.
+
+
         int[] array = Arrays.copyOf(unsorted,unsorted.length);
         Arrays.sort(array);
         return array;
     }
 
     public static int[] generatePrizes(int size, int prizeMoney) {
+        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
+        //TODO: In generatePrizes, size must be at least 3 and prizeMoney must be at least 0.
+
+
+        //TODO: implement this function
+
         return new int[]{1, 2, 3};
     }
 
@@ -131,10 +141,5 @@ public class Lottery {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
         }
-    }
-
-    public static int[] bubbleSort(int[] unsorted) {
-
-        return new int[]{1, 2, 3};
     }
 }

@@ -29,7 +29,6 @@ public class LotteryDriver {
         final int SEED = 314159;
         final int TOTAL_PRIZE = 10000;
 
-        picks = Lottery.generatePicksAlternate(SIZE, LOW_VALUE, HIGH_VALUE, SEED);
         // generate the picks
         picks = Lottery.generatePicks(SIZE, LOW_VALUE, HIGH_VALUE, SEED);
         for (int i=0; i<picks.length; i++) {

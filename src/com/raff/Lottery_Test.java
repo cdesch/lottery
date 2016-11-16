@@ -97,6 +97,41 @@ public class Lottery_Test {
      //   fail("Not Implemented");
     }
 
+    @Test
+    public void testCheckUserNumbersCase(){
+
+        assertTrue("Test that there are " + String.valueOf(2) + " number elements shared between the arrays",
+                testUserNumbersMatched(new int[]{10, 9, 3, 6, 5}, new int[]{1, 2, 3, 4, 5}, 2));
+        assertTrue("Test that there are " + String.valueOf(0) + " elements shared between the arrays",
+                testUserNumbersMatched(new int[]{10, 9, 11, 6, 23}, new int[]{1, 2, 3, 4, 5}, 0));
+        assertFalse("Test that there are not " + String.valueOf(0) + " elements shared between the arrays",
+                testUserNumbersMatched(new int[]{10, 9, 3, 6, 5}, new int[]{1, 2, 3, 4, 5}, 3));
+        assertTrue("Test that there are " + String.valueOf(5) + " elements shared between the arrays",
+                testUserNumbersMatched(new int[]{1, 2, 3, 4, 5}, new int[]{1, 2, 3, 4, 5}, 5));
+        assertTrue("Test that there are " + String.valueOf(0) + " elements shared between the arrays",
+                testUserNumbersMatched(new int[0], new int[0], 0));
+
+        //Uneven
+        //assertTrue("Test that there are " + String.valueOf(0) + " elements shared between the arrays", testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0));
+    }
+
+    /*
+     * Helper Function for test case testCheckUserNumbersCase()
+     * @param
+     * @param
+     * @param
+     * @return
+     */
+    public boolean testUserNumbersMatched(int[] picks, int[] userNumbers, int matchedCount){
+        return Lottery.checkUserNumbers(picks, userNumbers) == matchedCount ? true : false;
+    }
+
+    //Tests that a RuntimeErrorException is thrown if the arrays are not event
+    @Test(expected=RuntimeErrorException.class)
+    public void testCheckUserNumbersCaseIllegalAttributeCase(){
+        boolean result =  testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0);
+    }
+
     //Tests the extreme bounds of ensuring the random number is within the input parameters
     @Test
     public void testGenerateRandomNumberInRangeEdgeCase(){
