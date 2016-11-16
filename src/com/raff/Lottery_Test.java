@@ -107,9 +107,6 @@ public class Lottery_Test {
                 testUserNumbersMatched(new int[]{1, 2, 3, 4, 5}, new int[]{1, 2, 3, 4, 5}, 5));
         assertTrue("Test that there are " + String.valueOf(0) + " elements shared between the arrays",
                 testUserNumbersMatched(new int[0], new int[0], 0));
-
-        //Uneven
-        //assertTrue("Test that there are " + String.valueOf(0) + " elements shared between the arrays", testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0));
     }
 
     /*
@@ -123,7 +120,7 @@ public class Lottery_Test {
         return Lottery.checkUserNumbers(picks, userNumbers) == matchedCount ? true : false;
     }
 
-    //Tests that a RuntimeErrorException is thrown if the arrays are not event
+    //Tests that a RuntimeErrorException is thrown if the arrays are not even
     @Test(expected=RuntimeErrorException.class)
     public void testCheckUserNumbersCaseIllegalAttributeCase(){
         boolean result =  testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0);
