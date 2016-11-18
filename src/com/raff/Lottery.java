@@ -34,54 +34,62 @@ public class Lottery {
             while (isInArray(intArray, randomNumber)) {
                 randomNumber = generateRandomNumberInRange(lowValue, highValue, seed); // WARNING - Potential LARGE Running Loop
             }
+            //Lets put the random number generated that we are sure does NOT already exist in the array
+            //into the array
             intArray[i] = randomNumber;
         }
 
         //printArray(intArray); //FIXME: For debugging - Remove
 
         return sortArray(intArray);
-
     }
 
 
 
-
+    /*
+     * //TODO: Docs
+     */
     public static int checkUserNumbers(int[] picks, int[] userNumbers) {
 
+        //Check to see that the picks and userNumbers are the same length
 
-        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
-        //In checkUserNumbers, both picks and userNumbers cannot be null. Additionally, they must be the same length.
-        //Check to see that the picks and userNumbers are the same size
+        if(picks == null || userNumbers == null){
+            throw new RuntimeErrorException(new Error("The parameters cannot be null."));
+        }
 
+        if(picks.length != userNumbers.length ){
+            throw new RuntimeErrorException(new Error("The array parameters must be the same size."));
+        }
 
         int sharedNumbersCount = 0;
 
         //Use a nested loop to compare the two arrays
         //if one number shared between the arrays, increment the counter
-        //TODO: Implement
-//
-//        for (;;){
-//            for(;;){
-//
-//            }
-//        }
-
+        for(int i = 0; i < picks.length; i++){
+            for(int j = 0; j < userNumbers.length; j++){
+                if(picks[i] == userNumbers[j]){
+                    sharedNumbersCount++; //Add one to the count if the number is shared between the arrays
+                }
+            }
+        }
 
         return sharedNumbersCount;
     }
 
 
     /*
-    *   Sorts the array of elements into ascending order
-    *   @param unsorted the array of unsorted elements
-    *   @return array of sorted elements
+     *   Sorts the array of elements into ascending order
+     *   @param unsorted the array of unsorted elements
+     *   @return array of sorted elements
      */
     public static int[] sortArray(int[] unsorted) {
-        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
-        //TODO: In sortArray, unsorted may not be null.
 
+        //In sortArray, unsorted may not be null. If it is null, throw a RuntimeErrorException
+        if (unsorted == null){
+            throw new RuntimeErrorException(new Error("the parameter unsorted cannot be null."));
+        }
 
-        int[] array = Arrays.copyOf(unsorted,unsorted.length);
+        int[] array = Arrays.copyOf(unsorted, unsorted.length);
         Arrays.sort(array);
         return array;
     }
@@ -90,12 +98,26 @@ public class Lottery {
         //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
         //TODO: In generatePrizes, size must be at least 3 and prizeMoney must be at least 0.
 
-
         //TODO: implement this function
+
+        
 
         return new int[]{1, 2, 3};
     }
 
+
+    /////////////////////////////////////
+    /*
+     * Helper Methods
+     */
+    /////////////////////////////////////
+
+
+    /*
+     * //TODO: Doc
+     * Helper Method to Generate Random number within a range
+     * @param
+     */
     public static int generateRandomNumberInRange(int low, int high, long seed) {
 
         //Check if the lower bound is non equal or higher than the upperbound
@@ -117,21 +139,27 @@ public class Lottery {
     }
 
     /*
-        Determines if an integer is within the array or not.
-        @param array the array of integers that can be searched through
-        @param number the item that is being tested to determine if it is in the array
-        @return boolean return a conditional of the result
+     *   Helper Method for checking an array
+     *   Determines if an integer is within the array or not.
+     *   @param array the array of integers that can be searched through
+     *   @param number the item that is being tested to determine if it is in the array
+     *   @return boolean return a conditional of the result
      */
     public static boolean isInArray(int[] array, int number) {
         for (int i = 0; i < array.length; i++) {
-            if (number == array[i]) return true; // Return true that it is in the array and escape the function and loop
+            if (number == array[i]){
+                return true;// Return true that it is in the array and escape the function and loop
+            }
         }
+        //Return false if the loop completed without finding an item
+        //in the array that was equal to the number passed into the argument
         return false;
     }
 
     /*
-        Prints the array for debugging or utility purposes
-        @param array the array of elements to be printed
+     *   Helper function for general debugging
+     *   Prints the array for debugging or utility purposes
+     *   @param array the array of elements to be printed
      */
     public static void printArray(int[] array) {
         System.out.print("Printing Array: ");

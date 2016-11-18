@@ -70,16 +70,37 @@ public class Lottery_Test {
      * @return
      */
     public boolean testUserNumbersMatched(int[] picks, int[] userNumbers, int matchedCount){
-        return Lottery.checkUserNumbers(picks, userNumbers) == matchedCount ? true : false;
+        //return Lottery.checkUserNumbers(picks, userNumbers) == matchedCount ? true : false;
+        //These are the same
+        if (Lottery.checkUserNumbers(picks, userNumbers) == matchedCount){
+            return true;
+        }else{
+            return false;
+        }
     }
 
+    /*
+     * //TODO: Document
+     */
     //Tests that a RuntimeErrorException is thrown if the arrays are not even
     @Test(expected=RuntimeErrorException.class)
     public void testCheckUserNumbersCaseIllegalAttributeCase(){
-        boolean result =  testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0);
+        boolean result = testUserNumbersMatched(new int[0], new int[]{1, 2, 3, 4, 5}, 0);
     }
 
-    //Tests the extrem bounds of ensuring the random number is within the input parameters
+    /*
+    * //TODO: Document
+    */
+    //Tests that a RuntimeErrorException is thrown if the arrays are not even
+    @Test(expected=RuntimeErrorException.class)
+    public void testSortArrayIllegalAttributeCase(){
+        //int[] myUninitializedArray;
+        //int[] sorted = Lottery.sortArray(myUninitializedArray);
+    }
+
+
+
+    //Tests the extreme bounds of ensuring the random number is within the input parameters
     @Test
     public void testGenerateRandomNumberInRangeEdgeCase(){
         int lower_bound = 4;
