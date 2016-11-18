@@ -100,7 +100,7 @@ public class Lottery {
 
         //TODO: implement this function
 
-        
+
 
         return new int[]{1, 2, 3};
     }
