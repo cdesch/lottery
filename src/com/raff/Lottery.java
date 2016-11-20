@@ -11,16 +11,12 @@ public class Lottery {
 
     /*
      * Generates lottery picks
-     * ?Random?
      * @param size the number of items that will be generated in the array
      * @param lowValue the bottom end (min) of the range for the random numbers to be generated
      * @param highValue the top end (max) of the range for random numbers to be generated
      * @param seed the seed value for generating random numbers
      * @return a list (array) of integers with represents the lottery options
      */
-    //Dynamic array size
-
-
     public static int[] generatePicks(int size, int lowValue, int highValue, long seed) {
 
         //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
@@ -105,25 +101,31 @@ public class Lottery {
         return array;
     }
 
+
+    /*
+     * TODO: Doc
+     */
     public static int[] generatePrizes(int size, int prizeMoney) {
-        //Check if the lower bound is non equal or higher than the upperbound
-        if (size >= 3)
+
+        if (size <= 3)
         {
             throw new RuntimeErrorException(new Error("The size can be no less than 3."));
         }
 
-        //Check to make sure that the Random class has been seeded
-        if (prizeMoney >= 0)
+
+        if (prizeMoney <= 0)
         {
             throw new RuntimeErrorException(new Error("The prize can be no less than 0."));
         }
 
-        return generatePrizes; //don't know why this wont compile
+        //return generatePrizes; //don't know why this wont compile
 
         //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
         //TODO: In generatePrizes, size must be at least 3 and prizeMoney must be at least 0.
 
         //TODO: implement this function
+
+
 
 
 
