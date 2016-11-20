@@ -105,7 +105,6 @@ public class Lottery {
         return new int[]{1, 2, 3};
     }
 
-
     /////////////////////////////////////
     /*
      * Helper Methods
