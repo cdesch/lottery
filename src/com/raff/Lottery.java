@@ -19,6 +19,8 @@ public class Lottery {
      * @return a list (array) of integers with represents the lottery options
      */
     //Dynamic array size
+
+
     public static int[] generatePicks(int size, int lowValue, int highValue, long seed) {
 
         //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
@@ -28,10 +30,12 @@ public class Lottery {
         int[] intArray = new int[size];
 
         //With a loop, generate a random number and insert it into the array
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             int randomNumber = generateRandomNumberInRange(lowValue, highValue, seed);
             //Check to see if that number is already in the array? If it is not, add it, if it is in the array generate a new random number
-            while (isInArray(intArray, randomNumber)) {
+            while (isInArray(intArray, randomNumber))
+            {
                 randomNumber = generateRandomNumberInRange(lowValue, highValue, seed); // WARNING - Potential LARGE Running Loop
             }
             //Lets put the random number generated that we are sure does NOT already exist in the array
@@ -53,11 +57,13 @@ public class Lottery {
 
         //Check to see that the picks and userNumbers are the same length
 
-        if(picks == null || userNumbers == null){
+        if(picks == null || userNumbers == null)
+        {
             throw new RuntimeErrorException(new Error("The parameters cannot be null."));
         }
 
-        if(picks.length != userNumbers.length ){
+        if(picks.length != userNumbers.length )
+        {
             throw new RuntimeErrorException(new Error("The array parameters must be the same size."));
         }
 
@@ -65,10 +71,13 @@ public class Lottery {
 
         //Use a nested loop to compare the two arrays
         //if one number shared between the arrays, increment the counter
-        for(int i = 0; i < picks.length; i++){
-            for(int j = 0; j < userNumbers.length; j++){
-                if(picks[i] == userNumbers[j]){
-                    sharedNumbersCount++; //Add one to the count if the number is shared between the arrays
+        for(int i = 0; i < picks.length; i++)
+        {
+            for(int j = 0; j < userNumbers.length; j++)
+            {
+                if(picks[i] == userNumbers[j])
+                {
+                    sharedNumbersCount++;
                 }
             }
         }
@@ -82,10 +91,12 @@ public class Lottery {
      *   @param unsorted the array of unsorted elements
      *   @return array of sorted elements
      */
-    public static int[] sortArray(int[] unsorted) {
+    public static int[] sortArray(int[] unsorted)
+    {
 
         //In sortArray, unsorted may not be null. If it is null, throw a RuntimeErrorException
-        if (unsorted == null){
+        if (unsorted == null)
+        {
             throw new RuntimeErrorException(new Error("the parameter unsorted cannot be null."));
         }
 
@@ -95,6 +106,20 @@ public class Lottery {
     }
 
     public static int[] generatePrizes(int size, int prizeMoney) {
+        //Check if the lower bound is non equal or higher than the upperbound
+        if (size >= 3)
+        {
+            throw new RuntimeErrorException(new Error("The size can be no less than 3."));
+        }
+
+        //Check to make sure that the Random class has been seeded
+        if (prizeMoney >= 0)
+        {
+            throw new RuntimeErrorException(new Error("The prize can be no less than 0."));
+        }
+
+        return generatePrizes; //don't know why this wont compile
+
         //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
         //TODO: In generatePrizes, size must be at least 3 and prizeMoney must be at least 0.
 
@@ -104,6 +129,7 @@ public class Lottery {
 
         return new int[]{1, 2, 3};
     }
+
 
     /////////////////////////////////////
     /*
@@ -117,21 +143,25 @@ public class Lottery {
      * Helper Method to Generate Random number within a range
      * @param
      */
-    public static int generateRandomNumberInRange(int low, int high, long seed) {
+    public static int generateRandomNumberInRange(int low, int high, long seed)
+    {
 
         //Check if the lower bound is non equal or higher than the upperbound
-        if (low >= high){
+        if (low >= high)
+        {
             throw new RuntimeErrorException(new Error("The lower bound is greater than the upper bound"));
         }
 
         //Check to make sure that the Random class has been seeded
-        if (rnd == null) {
+        if (rnd == null)
+        {
             rnd = new Random(seed);
         }
 
         int random = rnd.nextInt();
         //Potentially bad idea with a long running loop
-        while (random < low || random > high) {
+        while (random < low || random > high)
+        {
             random = rnd.nextInt();
         }
         return random;
@@ -144,9 +174,12 @@ public class Lottery {
      *   @param number the item that is being tested to determine if it is in the array
      *   @return boolean return a conditional of the result
      */
-    public static boolean isInArray(int[] array, int number) {
-        for (int i = 0; i < array.length; i++) {
-            if (number == array[i]){
+    public static boolean isInArray(int[] array, int number)
+    {
+        for (int i = 0; i < array.length; i++)
+        {
+            if (number == array[i])
+            {
                 return true;// Return true that it is in the array and escape the function and loop
             }
         }
@@ -160,10 +193,12 @@ public class Lottery {
      *   Prints the array for debugging or utility purposes
      *   @param array the array of elements to be printed
      */
-    public static void printArray(int[] array) {
+    public static void printArray(int[] array)
+    {
         System.out.print("Printing Array: ");
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++)
+        {
             System.out.print(array[i] + " ");
         }
     }
