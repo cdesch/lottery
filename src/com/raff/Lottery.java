@@ -2,7 +2,7 @@ package com.raff;
 import javax.management.RuntimeErrorException;
 import java.util.Random;
 import java.util.Arrays;
-
+import java.lang.Math;
 
 public class Lottery {
 
@@ -19,8 +19,16 @@ public class Lottery {
      */
     public static int[] generatePicks(int size, int lowValue, int highValue, long seed) {
 
-        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
-        //In generatePicks, size must be 3 or greater but no larger than the range from lowValue to highValue.
+
+        //In generatePicks, size must be 3 or greater but no larger than the range from lowValue to highValue.\
+        if (size < 3)
+        {
+            throw new RuntimeErrorException(new Error("The size must be greater than 3"));
+        }
+
+        if (size > (highValue - lowValue)){
+            throw new RuntimeErrorException(new Error("The size must be less than the difference of the highValue and lowValue"));
+        }
 
         //Create with empty slots of a certain size
         int[] intArray = new int[size];
@@ -39,8 +47,6 @@ public class Lottery {
             intArray[i] = randomNumber;
         }
 
-        //printArray(intArray); //FIXME: For debugging - Remove
-
         return sortArray(intArray);
     }
 
@@ -56,11 +62,13 @@ public class Lottery {
         if(picks == null || userNumbers == null)
         {
             throw new RuntimeErrorException(new Error("The parameters cannot be null."));
+            //return -1; //Alternatively return -1 if exceptions are not supported
         }
 
         if(picks.length != userNumbers.length )
         {
             throw new RuntimeErrorException(new Error("The array parameters must be the same size."));
+            //return -1; //Alternatively return -1 if exceptions are not supported
         }
 
         int sharedNumbersCount = 0;
@@ -94,6 +102,7 @@ public class Lottery {
         if (unsorted == null)
         {
             throw new RuntimeErrorException(new Error("the parameter unsorted cannot be null."));
+            //return null; //Alternatively return null if exceptions are not supported
         }
 
         int[] array = Arrays.copyOf(unsorted, unsorted.length);
@@ -101,49 +110,74 @@ public class Lottery {
         return array;
     }
 
-
     /*
      * TODO: Doc
      */
     public static int[] generatePrizes(int size, int prizeMoney) {
 
+        //In generatePrizes, size must be at least 3.
         if (size <= 3)
         {
             throw new RuntimeErrorException(new Error("The size can be no less than 3."));
+            //return null; //Alternatively return null if exceptions are not supported
         }
 
-
-        if (prizeMoney <= 0)
+        //In generatePrizes, prizeMoney must be at least 0.
+        if (prizeMoney < 0)
         {
             throw new RuntimeErrorException(new Error("The prize can be no less than 0."));
+            //return null; //Alternatively return null if exceptions are not supported
         }
 
-        //return generatePrizes; //don't know why this wont compile
 
-        //TODO: check for this. Throw runtime exception like the on in generateRandomNumberInRange() if it is
-        //TODO: In generatePrizes, size must be at least 3 and prizeMoney must be at least 0.
+        //0,0,0
 
-        //TODO: implement this function
+        //Number of possible correct guesses. Starting at not guessing any correct (0 guessed correctly)
+        // plus the size of the array as the player may guess N numbers of the size of the array correct.
+        int numberPossibleCorrect = size + 1;
+        int[] prizes = new int[numberPossibleCorrect]; //Java guarantees that integers will default to 0
 
+        int remainingPrizeMoney = prizeMoney; //Initialize the remaining prize money with the total money available
 
+        //Starting at the right side of the array (highest index) to the last 3 elements of the array
+        // calculate the prize money for the level
+        for(int i = prizes.length - 1; i > 3; i-- ){
+            //Calculate the prize money for the slot
+            prizes[i] = calcPrizeMoney(remainingPrizeMoney);
+            //Subtract the money allocated for that level from the pool of prize money available.
+            remainingPrizeMoney -= prizes[i];
+        }
 
+        //Prize Award slots 0,1,2 should ALWAYS be 0 (Set to automatically from JAVA default initialization)
+        //The 3rd index should ALWAYS be the remaining amount of money
+        prizes[3] = remainingPrizeMoney;
 
-
-        return new int[]{1, 2, 3};
+        return prizes;
     }
 
+    /*
+     * Helper Function to Calculate Prize Value
+     */
+
+    public static int calcPrizeMoney(int prizeMoney){
+        //Cast to floats then determine 3/4 amount. Round to nearest dollar
+        float prizeValue = (float) ((float)prizeMoney * 0.75);
+        return Math.round(prizeValue);
+    }
 
     /////////////////////////////////////
     /*
-     * Helper Methods
+     * Helper Methods for utility within the program for
      */
     /////////////////////////////////////
 
 
     /*
-     * //TODO: Doc
      * Helper Method to Generate Random number within a range
-     * @param
+     * @param low is the lower range the number must be within
+     * @param high is the higher range the number must be within
+     * @param seed is the integer seed for randomization
+     * @return random is the random number generated within the low and high ranges
      */
     public static int generateRandomNumberInRange(int low, int high, long seed)
     {
@@ -152,6 +186,7 @@ public class Lottery {
         if (low >= high)
         {
             throw new RuntimeErrorException(new Error("The lower bound is greater than the upper bound"));
+            //return -1; //Alternatively return -1 if exceptions are not supported
         }
 
         //Check to make sure that the Random class has been seeded
@@ -191,17 +226,17 @@ public class Lottery {
     }
 
     /*
-     *   Helper function for general debugging
+     *   Helper Method for general debugging
      *   Prints the array for debugging or utility purposes
      *   @param array the array of elements to be printed
      */
     public static void printArray(int[] array)
     {
         System.out.print("Printing Array: ");
-
         for (int i = 0; i < array.length; i++)
         {
             System.out.print(array[i] + " ");
         }
+        System.out.println(""); //Print Carriage Return using println()
     }
 }
